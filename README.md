@@ -1,14 +1,17 @@
-# Paradise Nursery - Shopping Application
+# e-plantShopping
 
-An online plant shop built with React and Redux Toolkit. Browse a variety of houseplants, add them to your shopping cart, and manage your selections before checkout.
+## Paradise Nursery - Online Plant Shopping Application
+
+An online plant shop (e-plantShopping) built with React and Redux Toolkit. Browse a variety of houseplants, add them to your shopping cart, and manage your selections before checkout.
 
 ## Features
 
-- **Landing Page**: Beautiful hero section with company info and a "Get Started" button
+- **Landing Page**: Background image, company description, and a "Get Started" button linking to products
 - **Product Listing**: 18 houseplants organized into 3 categories (Aromatic, Air Purifying, Succulents & Cacti)
 - **Shopping Cart**: Full cart management with quantity controls, item removal, and total cost calculation
-- **Redux State Management**: Centralized cart state using Redux Toolkit
+- **Redux State Management**: Centralized cart state using Redux Toolkit (CartSlice)
 - **Responsive Design**: Mobile-friendly layout
+- **Navigation Bar**: Appears on Product Listing and Cart pages with dynamic cart icon count
 
 ## Tech Stack
 
@@ -22,13 +25,7 @@ An online plant shop built with React and Redux Toolkit. Browse a variety of hou
 
 ```bash
 npm install
-npm run dev
-```
-
-## Deployment
-
-```bash
-npm run deploy
+npm run preview
 ```
 
 ## Project Structure
@@ -38,15 +35,13 @@ src/
 ├── App.jsx          # Landing page + routing
 ├── App.css          # Landing page styles (background image)
 ├── AboutUs.jsx      # Company description component
-├── ProductList.jsx  # Product listing page
+├── AboutUs.css      # AboutUs styles
+├── ProductList.jsx  # Product listing page with navbar
 ├── ProductList.css  # Product listing styles
-├── CartItem.jsx     # Shopping cart page
+├── CartItem.jsx     # Shopping cart page with navbar
 ├── CartItem.css     # Shopping cart styles
-├── Header.jsx       # Navigation bar component
-├── Header.css       # Navigation bar styles
-├── store/
-│   ├── CartSlice.jsx  # Redux slice for cart state
-│   └── store.js       # Redux store configuration
+├── CartSlice.jsx    # Redux slice for cart state
+├── store.js         # Redux store configuration
 ├── main.jsx         # App entry point with providers
-└── index.css        # Global styles
+└── index.css        # Global styles + navbar styles
 ```
