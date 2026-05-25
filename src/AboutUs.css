@@ -1,0 +1,17 @@
+.about-us {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.about-us h2 {
+  display: none;
+}
+
+.about-us p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #e0e0e0;
+}

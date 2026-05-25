@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem } from './store/CartSlice';
-import Header from './Header';
+import { Link } from 'react-router-dom';
+import { addItem } from './CartSlice';
 import './ProductList.css';
 
 const plantsData = [
@@ -42,6 +42,7 @@ const plantsData = [
 function ProductList() {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.items);
+  const totalQuantity = useSelector(state => state.cart.totalQuantity);
 
   const isInCart = (plantName) => {
     return cartItems.some(item => item.name === plantName);
@@ -53,7 +54,22 @@ function ProductList() {
 
   return (
     <div className="product-list-page">
-      <Header />
+      <header className="header">
+        <div className="header-content">
+          <Link to="/" className="header-logo">
+            <span className="logo-icon">🌿</span>
+            <span className="logo-text">Paradise Nursery</span>
+          </Link>
+          <nav className="header-nav">
+            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/products" className="nav-link">Plants</Link>
+            <Link to="/cart" className="nav-link cart-link">
+              <span className="cart-icon">🛒</span>
+              <span className="cart-count">{totalQuantity}</span>
+            </Link>
+          </nav>
+        </div>
+      </header>
       <div className="product-list-container">
         <h1 className="page-title">Our Collection</h1>
         <p className="page-subtitle">Discover the perfect plant for every corner of your home</p>

@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, incrementItem, decrementItem } from './store/CartSlice';
+import { removeItem, incrementItem, decrementItem } from './CartSlice';
 import { Link } from 'react-router-dom';
-import Header from './Header';
 import './CartItem.css';
 
 function CartItem() {
@@ -20,7 +19,22 @@ function CartItem() {
 
   return (
     <div className="cart-page">
-      <Header />
+      <header className="header">
+        <div className="header-content">
+          <Link to="/" className="header-logo">
+            <span className="logo-icon">🌿</span>
+            <span className="logo-text">Paradise Nursery</span>
+          </Link>
+          <nav className="header-nav">
+            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/products" className="nav-link">Plants</Link>
+            <Link to="/cart" className="nav-link cart-link">
+              <span className="cart-icon">🛒</span>
+              <span className="cart-count">{totalQuantity}</span>
+            </Link>
+          </nav>
+        </div>
+      </header>
       <div className="cart-container">
         <h1 className="cart-title">Shopping Cart</h1>
 
