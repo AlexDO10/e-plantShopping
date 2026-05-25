@@ -1,0 +1,91 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from './store/CartSlice';
+import Header from './Header';
+import './ProductList.css';
+
+const plantsData = [
+  {
+    category: 'Aromatic Plants',
+    plants: [
+      { name: 'Lavender', price: 18, image: 'https://images.unsplash.com/photo-1611909023032-2d6b3134ecba?w=300&h=300&fit=crop', description: 'Fragrant purple flowers' },
+      { name: 'Rosemary', price: 15, image: 'https://images.unsplash.com/photo-1515586838455-8f8f940d6853?w=300&h=300&fit=crop', description: 'Aromatic herb for cooking' },
+      { name: 'Jasmine', price: 22, image: 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?w=300&h=300&fit=crop', description: 'Sweet-scented white flowers' },
+      { name: 'Mint', price: 12, image: 'https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=300&h=300&fit=crop', description: 'Fresh and invigorating' },
+      { name: 'Eucalyptus', price: 20, image: 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?w=300&h=300&fit=crop', description: 'Refreshing scent and silvery leaves' },
+      { name: 'Lemon Balm', price: 14, image: 'https://images.unsplash.com/photo-1622467827417-bbe2237067a9?w=300&h=300&fit=crop', description: 'Citrusy aroma, calming properties' },
+    ],
+  },
+  {
+    category: 'Air Purifying Plants',
+    plants: [
+      { name: 'Snake Plant', price: 25, image: 'https://images.unsplash.com/photo-1593482892580-e32e47e0a42f?w=300&h=300&fit=crop', description: 'Low maintenance air purifier' },
+      { name: 'Peace Lily', price: 28, image: 'https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=300&h=300&fit=crop', description: 'Elegant white blooms' },
+      { name: 'Spider Plant', price: 16, image: 'https://images.unsplash.com/photo-1572688484438-313a56e6dc34?w=300&h=300&fit=crop', description: 'Cascading green and white leaves' },
+      { name: 'Pothos', price: 14, image: 'https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=300&h=300&fit=crop', description: 'Trailing vine, very hardy' },
+      { name: 'Rubber Plant', price: 30, image: 'https://images.unsplash.com/photo-1609132718484-cc90df3417f8?w=300&h=300&fit=crop', description: 'Bold dark green leaves' },
+      { name: 'Boston Fern', price: 22, image: 'https://images.unsplash.com/photo-1597055181300-e3633a917388?w=300&h=300&fit=crop', description: 'Lush feathery fronds' },
+    ],
+  },
+  {
+    category: 'Succulents & Cacti',
+    plants: [
+      { name: 'Aloe Vera', price: 18, image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=300&h=300&fit=crop', description: 'Medicinal and decorative' },
+      { name: 'Echeveria', price: 12, image: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=300&h=300&fit=crop', description: 'Rosette-shaped succulent' },
+      { name: 'Jade Plant', price: 20, image: 'https://images.unsplash.com/photo-1509937528035-ad76f8df97e1?w=300&h=300&fit=crop', description: 'Symbol of prosperity' },
+      { name: 'Barrel Cactus', price: 24, image: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=300&h=300&fit=crop', description: 'Round desert beauty' },
+      { name: 'Zebra Haworthia', price: 14, image: 'https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=300&h=300&fit=crop', description: 'Striped compact succulent' },
+      { name: 'String of Pearls', price: 16, image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=300&h=300&fit=crop', description: 'Cascading bead-like leaves' },
+    ],
+  },
+];
+
+function ProductList() {
+  const dispatch = useDispatch();
+  const cartItems = useSelector(state => state.cart.items);
+
+  const isInCart = (plantName) => {
+    return cartItems.some(item => item.name === plantName);
+  };
+
+  const handleAddToCart = (plant) => {
+    dispatch(addItem(plant));
+  };
+
+  return (
+    <div className="product-list-page">
+      <Header />
+      <div className="product-list-container">
+        <h1 className="page-title">Our Collection</h1>
+        <p className="page-subtitle">Discover the perfect plant for every corner of your home</p>
+        {plantsData.map((category) => (
+          <div key={category.category} className="category-section">
+            <h2 className="category-title">{category.category}</h2>
+            <div className="plants-grid">
+              {category.plants.map((plant) => (
+                <div key={plant.name} className="plant-card">
+                  <div className="plant-image-container">
+                    <img src={plant.image} alt={plant.name} className="plant-image" />
+                  </div>
+                  <div className="plant-info">
+                    <h3 className="plant-name">{plant.name}</h3>
+                    <p className="plant-description">{plant.description}</p>
+                    <p className="plant-price">${plant.price}</p>
+                    <button
+                      className={`add-to-cart-btn ${isInCart(plant.name) ? 'disabled' : ''}`}
+                      onClick={() => handleAddToCart(plant)}
+                      disabled={isInCart(plant.name)}
+                    >
+                      {isInCart(plant.name) ? 'Added to Cart' : 'Add to Cart'}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default ProductList;
