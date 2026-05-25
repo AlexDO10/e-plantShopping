@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, incrementItem, decrementItem } from './CartSlice';
+import { removeItem, updateQuantity } from './CartSlice';
 import { Link } from 'react-router-dom';
 import './CartItem.css';
 
@@ -74,14 +74,14 @@ function CartItem() {
                     <div className="quantity-controls">
                       <button
                         className="quantity-btn decrease"
-                        onClick={() => dispatch(decrementItem(item.name))}
+                        onClick={() => dispatch(updateQuantity({ name: item.name, amount: item.quantity - 1 }))}
                       >
                         −
                       </button>
                       <span className="quantity-display">{item.quantity}</span>
                       <button
                         className="quantity-btn increase"
-                        onClick={() => dispatch(incrementItem(item.name))}
+                        onClick={() => dispatch(updateQuantity({ name: item.name, amount: item.quantity + 1 }))}
                       >
                         +
                       </button>
